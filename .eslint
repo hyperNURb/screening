@@ -1,0 +1,46 @@
+{
+  "extends": "eslint-config-google",
+
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "jquery": true
+  },
+  "rules": {
+    "id-length": [1, {
+      "min": 2,
+      "max": 25,
+      "properties": "never",
+      // x, y, z - Point coordinates
+      // i, j, k - Loop indexes
+      // k, v - Key, Value
+      // e - exception
+      // $, _ - libraries
+      "exceptions": ["x", "y", "z", "i", "j", "k", "v", "e", "$", "_"]
+    }],
+    "require-jsdoc": 0,
+    "space-before-function-paren": [
+      2, {"anonymous": "always", "named": "never"}
+    ],
+    "max-len": [1, 80, 2, {
+      "ignoreComments": true,
+      "ignoreUrls": true
+    }],
+    "no-implicit-coercion": [2, {"boolean": false}],
+    "no-inline-comments": 0,
+    "no-negated-condition": 0,
+    "no-unused-vars": [2, {
+      "args": "none",
+      "vars": "all"
+    }],
+    // Each variable declaration must have its own var keyword
+    "one-var": [2, "never"],
+    "quote-props": [2, "as-needed", { "numbers": true, "keywords": true }],
+    "vars-on-top": 2,
+
+    // CanJS uses a lot of these exceptions
+    "camelcase": 0,
+    "new-cap": 0,
+    "no-new": 0,
+  }
+}
