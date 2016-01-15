@@ -49,11 +49,11 @@ exports.objects = {
 
   },
   /*
-    Keys
+    Reverse keys
     input: {a: 1, b: 2, c: 3}
-    output: [a, b, c]
+    output: [c, b, a]
    */
-  keys: function (obj) {
+  reverseKeys: function (obj) {
 
   },
   /*
