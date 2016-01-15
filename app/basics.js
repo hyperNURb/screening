@@ -98,6 +98,17 @@ exports.functions = {
    */
   bind: function (fn, context) {
 
+  },
+  /*
+    Partial function
+    i.e.
+    function log() {
+      console.log(arguments);
+    }
+    partial(log, 'a', 'b')('c', 'd', 'e'); // a, b, c, d, e
+   */
+  partial: function (fn) {
+
   }
 };
 
