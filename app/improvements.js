@@ -18,23 +18,33 @@ var foo = new Thinger(),
   - override the value of the bar property for the variable foo without
     affecting the value of the bar property for the variable bim?
  */
-
+foo.bar = "ovrr1";
+console.log(foo);
+console.log(bim);
 
 /*
   - how would you affect the value of the bar property for both foo and bim?
  */
+Thinger.prototype.bar = "ovrr1";
+console.log(foo);
+console.log(bim);
 
 
 /*
   - how would you add a method to foo and bim to console.log the value of each
     object's bar property?
  */
+Thinger.prototype.logBar = function() { console.log(this.bar); };
+foo.logBar();
+bim.logBar();
 
 
 /*
   - how would you tell if the object's bar property had been overridden for
     the particular object?
  */
+console.log(Thinger.prototype.bar !== foo.bar);
+console.log(Thinger.prototype.bar !== bim.bar);
 
 
 
@@ -60,6 +70,7 @@ var myObjects = {
   widget: new Widget()
 };
 
+Object.keys(myObjects).forEach( (x) => myObjects[x].destroy() );
 
 /*
   3. Given the following array, create an array that contains the contents of
@@ -70,6 +81,8 @@ var myObjects = {
  */
 
 var myArray = [ 'foo', 'bar', 'baz' ];
+var extArray = myArray.map( (x) => Array(3).fill(x).join(" ") );
+console.log(extArray);
 
 /*
   4. What issues do you see with the following code? how would you fix it?
@@ -80,14 +93,15 @@ var myArray = [ 'foo', 'bar', 'baz' ];
 
   $.get({
     url: 'foo.php',
-    success: function (resp) {
+    done: function (resp) {
       foo = resp.foo;
+      
+      if (foo) {
+        // run this important code
+      }
     }
   });
 
-  if (foo) {
-    // run this important code
-  }
 })(jQuery);
 
 
@@ -96,10 +110,7 @@ var myArray = [ 'foo', 'bar', 'baz' ];
  */
 
 (function ($){
-  $('li.foo a').attr('title', 'i am foo');
-  $('li.bar a').attr('title', 'i am bar');
-  $('li.baz a').attr('title', 'i am baz');
-  $('li.bop a').attr('title', 'i am bop');
+    $('li a').each(function( index ) { $( this ).attr('title', 'i am ' + $( this ).parent().attr('class')); });
 })(jQuery);
 
 
@@ -108,10 +119,15 @@ var myArray = [ 'foo', 'bar', 'baz' ];
  */
 
 (function ($){
-  for (i = 0; i <= 100; i++) {
-    $('#thinger').append('<p><span class="thinger">i am thinger ' + i + '</span></p>');
-    $('#gizmo').append('<p><span class="gizmo">i am gizmo ' + i + '</span></p>');
-  }
+    var prot = $('<p><span class="thinger"></span></p>');
+    
+    for (i = 0; i <= 100; i++) {
+      prot.children().text('i am thinger ' + i);
+      prot.clone().appendTo('#thinger');
+      
+      prot.children().text('i am gizmo ' + i);
+      prot.clone().appendTo('#gizmo');
+    }
 })(jQuery);
 
 
@@ -145,10 +161,16 @@ var menuItems = [{
     name: 'Bread'
   }];
 
+var endItems = menuItems.map( (x) => x.name + (x.extras ? " (" + x.extras.join(", ") + ")" : "" ));
+
+console.log(endItems);
+
 /*
   8. Write code such that the following alerts "Hello World"
  */
-
+say = function (...args1) {
+    return function(...args2) {return alert.call(this, [args1, args2].join(" ")); };
+  }
 say('Hello')('World');
 
 
@@ -157,11 +179,11 @@ say('Hello')('World');
  */
 
 var date = new Date(),
-    day = date.getDate(),
-    month = date.getMonth(),
     dates = [];
 
 for (var i = 0; i <= 5; i++) {
-  dates.push(month + '/' + (day + i));
+    var nd = new Date(date);
+    nd.setDate(nd.getDate() + i);
+    dates.push(nd.getMonth() + '/' + nd.getDate());
 }
 console.log('The next five days are ', dates.join(', '));
