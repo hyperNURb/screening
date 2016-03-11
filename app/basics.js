@@ -73,7 +73,7 @@ exports.objects = {
   },
   /*
     Get
-    input: {a: {b: c: { d: 2}}}, 'a.b.c.d'
+    input: {a: {b: {c: {d: 2}}}}, 'a.b.c.d'
     output: 2
    */
   get: function (obj, prop) {
