@@ -1,5 +1,6 @@
-exports = (typeof window === 'undefined') ? global : window;
+'use strict';
 
+exports = (typeof window === 'undefined') ? global : window;
 exports.arrays = {
   /*
     Square square array items
