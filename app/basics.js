@@ -5,7 +5,7 @@ exports.arrays = {
   /*
     Square square array items
     input: [1, 2, 3]
-    output: [2, 4, 6]
+    output: [2, 4, 9]
     */
   square: function (arr) {
 
